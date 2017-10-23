@@ -1,6 +1,14 @@
 <template>
   <div class="box">
     <nav class="navheader">
+      <div class="menuH">
+        <span class="menuopen">
+          <img src="/static/menu.svg" width="25" height="25" alt="">  
+        </span>
+        <span class="menuclose">
+          <img src="/static/close.svg" width="25" height="25" alt="">
+        </span>
+      </div> 
       <a class="nav--logo" href="">
         <img src="/static/logo.png" width="" height="40" alt="">
       </a>
@@ -151,7 +159,7 @@
           </div>
         </div>
       </aside>
-      <div class="map" id="">
+      <div class="map">
         <div id="google-maplima"></div>  
         <div class="map--etiqueta">
           <span>150 Listings Found</span>
@@ -170,6 +178,20 @@ export default {
     }
   },
   mounted (){
+    $('.menuH .menuopen').click(function(event) {
+      $(this).addClass('active');
+      $('.aside--bar').addClass('active');
+      $('.map').addClass('active');
+      $('.menuclose').addClass('active');
+    });
+    $('.menuH .menuclose').click(function(event) {
+      $(this).removeClass('active');
+      $('.menuopen').removeClass('active');
+      $('.map').removeClass('active');
+      $('.aside--bar').removeClass('active');
+    });
+
+
     var slider = new Slider('.input--slider_1', {});
      function initMaplima() {
       var $map = $( '#google-maplima' );
@@ -201,8 +223,59 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+  .boxinput{
+    width: 48%;
+    display: inline-block;
+    vertical-align: top;
+  }
+  .box{
+    overflow: hidden;
+  }
+  .menuH{
+    position: absolute;
+    top: 0;
+    left: 20px;
+    bottom: 0;
+    width: 40px;
+    height: 40px;
+    line-height: 38px;
+    margin: auto;
+    opacity: 0;
+    visibility: hidden;
+    background: #30A9A0;
+    padding: 10px;
+    border-radius: 6px;
+    
+  }
+  .menuH span{
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    cursor: pointer;
+    width: 24px;
+
+  }
+  .menuclose{
+    opacity: 0;
+    visibility: hidden;
+    
+  }
+  .menuclose.active{
+    opacity: 1;
+    visibility: visible;
+    
+  }
+  .menuopen.active{
+    opacity: 0;
+    visibility: hidden;
+    
+  }
   .navheader{
     padding: 10px 0;
+    position: relative;
   }
   .map--etiqueta{
     position: absolute;
@@ -239,18 +312,23 @@ export default {
   }
   .aside--bar{
     width: 25%;
-    height: 100%;
+    height: calc(100vh - 60px);
     background: #F3F3F3;
     padding: 20px;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     text-align: left;
+    overflow: auto;
+    transition: all .4s ease;
+
   }
   .map{
     width: 75%;
-    height: 100vh;
+    height: calc(100vh - 60px);
     position: relative;
+    margin: 0 0 0 auto;
+    transition: all .4s ease;
   }
   .map #google-maplima{
     position: absolute;
@@ -269,6 +347,7 @@ export default {
     display: -o-flex;
     display: flex;
     justify-content: center;
+    position: relative;
   }
   .box-itm{
     padding: 30px 0;
@@ -279,5 +358,35 @@ export default {
     font-weight: bold;
     color: #797979;
     font-family: 'arial', sanserif;
+  }
+  @media screen and (max-width: 1024px) {
+    .aside--bar{
+      width: 40%;
+    }
+    .map{
+      width: 60%;
+    }
+  }
+  @media screen and (max-width: 768px) {
+    .menuH{
+      opacity: 1;
+      visibility: visible;
+    }
+    .aside--bar{
+      left: -350px;
+      position: absolute;
+      top: 0;
+      width: 350px;
+    }
+    .aside--bar.active{
+      left: 0;
+    }
+    .map{
+      width: 700px;
+    }
+    .map.active{
+      width: calc(700px - 350px);
+      
+    }
   }
 </style>
