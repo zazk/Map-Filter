@@ -35,12 +35,12 @@ export default {
         let urlPoint = point.avenida + ' ' + point.numero + ' ' + point.distrito
         let urlAddress = urlBase + urlPoint 
 
-        if( i >=0 && i <=20 ){
+        if( i >=0 && i <80 ){
           continue; 
         }
         console.log('Pass');
-        if( i >= 22 ){ 
-          //print data 
+        if( i >= 81 ){ 
+          //print data     
           break;
         } 
         axios.get(urlAddress,{index:i})
