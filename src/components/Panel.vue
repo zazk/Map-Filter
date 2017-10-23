@@ -1,63 +1,70 @@
 <template>
   <div class="box">
-    <aside class="aside--bar">
-      <div class="box-itm">
-        <h3>LOCATION</h3>
-        <input type="text" class="form-control" placeholder="Enter a location e.g. Hamilton">
-      </div>
-      <div class="box-itm">
-        <h3>PRICE RANGE</h3>
-        <input id="ex2" type="text" class="span2 input--slider_1" value="" 
-          data-slider-min="10" 
-          data-slider-max="1000" 
-          data-slider-step="5" 
-          data-slider-value="[250,450]"/>
-        <span class="box--price">
-          <b>€ 10</b>  <b>€ 1000</b> 
-        </span>   
-      </div>
-      <div class="box-itm">
-        <h3>BEDROOMS</h3>
-        <input id="ex3" type="text" class="span2 input--slider_2" value="" 
-          data-slider-min="10" 
-          data-slider-max="1000" 
-          data-slider-step="5" 
-          data-slider-value="[250,450]"/>
-        <span class="box--price">
-          <b>€ 10</b>  <b>€ 1000</b> 
-        </span> 
-      </div>
-      <!-- BOX FILTERS -->
-      <div class="box--filter">
-        <span>ADVANCED FILTERS <i></i></span>
-      </div>
+    <nav class="navheader">
+      <a class="nav--logo" href="">
+        <img src="/static/logo.png" width="" height="40" alt="">
+      </a>
+    </nav>
+    <div class="box--flex">
+      <aside class="aside--bar">
+        <div class="box-itm">
+          <h3>LOCATION</h3>
+          <input type="text" class="form-control" placeholder="Enter a location e.g. Hamilton">
+        </div>
+        <div class="box-itm">
+          <h3>PRICE RANGE</h3>
+          <input id="ex2" type="text" class="span2 input--slider_1" value="" 
+            data-slider-min="10" 
+            data-slider-max="1000" 
+            data-slider-step="5" 
+            data-slider-value="[250,450]"/>
+          <span class="box--price">
+            <b>€ 10</b>  <b>€ 1000</b> 
+          </span>   
+        </div>
+        <div class="box-itm">
+          <h3>BEDROOMS</h3>
+          <input id="ex3" type="text" class="span2 input--slider_2" value="" 
+            data-slider-min="10" 
+            data-slider-max="1000" 
+            data-slider-step="5" 
+            data-slider-value="[250,450]"/>
+          <span class="box--price">
+            <b>€ 10</b>  <b>€ 1000</b> 
+          </span> 
+        </div>
+        <!-- BOX FILTERS -->
+        <div class="box--filter">
+          <span>ADVANCED FILTERS <i></i></span>
+        </div>
 
-      <div class="box-itm">
-        <h3>BATHROOMS</h3>
-        <input id="ex4" type="text" class="span2 input--slider_3" value="" 
-          data-slider-min="10" 
-          data-slider-max="1000" 
-          data-slider-step="5" 
-          data-slider-value="[250,450]"/>
-        <span class="box--price">
-          <b>€ 10</b>  <b>€ 1000</b> 
-        </span>
-      </div>
-      <div class="box-itm">
-        <h3>LEASE DURATION</h3>
-        <select class="form-control" name="" id="">
-          <option value="">8 Months</option>
-        </select>
-      </div>
-      <div class="box-itm">
-        <h3>LEASE DURATION</h3>
-        <input type="text" class="form-control" placeholder="Enter Date">
-      </div>
-    </aside>
-    <div class="map" id="">
-      <div id="google-maplima"></div>  
-      <div class="map--etiqueta">
-        <span>150 Listings Found</span>
+        <div class="box-itm">
+          <h3>BATHROOMS</h3>
+          <input id="ex4" type="text" class="span2 input--slider_3" value="" 
+            data-slider-min="10" 
+            data-slider-max="1000" 
+            data-slider-step="5" 
+            data-slider-value="[250,450]"/>
+          <span class="box--price">
+            <b>€ 10</b>  <b>€ 1000</b> 
+          </span>
+        </div>
+        <div class="box-itm">
+          <h3>LEASE DURATION</h3>
+          <select class="form-control" name="" id="">
+            <option value="">8 Months</option>
+          </select>
+        </div>
+        <div class="box-itm">
+          <h3>LEASE DURATION</h3>
+          <input type="text" class="form-control" placeholder="Enter Date">
+        </div>
+      </aside>
+      <div class="map" id="">
+        <div id="google-maplima"></div>  
+        <div class="map--etiqueta">
+          <span>150 Listings Found</span>
+        </div>
       </div>
     </div>
   </div>
@@ -95,7 +102,7 @@ export default {
       var marker = new google.maps.Marker({
           position: myLatlng,
           map: map,
-          icon:'./assets/location.png'
+          icon:'/static/location.png'
       });
     }
     google.maps.event.addDomListener(window, 'load', initMaplima);   
@@ -106,6 +113,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+  .navheader{
+    padding: 10px 0;
+  }
   .map--etiqueta{
     position: absolute;
     z-index: 600;
@@ -164,7 +174,7 @@ export default {
   .box--price{
     display: block;
   }
-  .box{
+  .box--flex{
     display: -webkit-flex;
     display: -moz-flex;
     display: -ms-flex;
