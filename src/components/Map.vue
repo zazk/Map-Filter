@@ -1,7 +1,14 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-  </div>
+        Filter by price interval: <b>€ 10</b> 
+        <input id="ex2" type="text" class="span2" value="" 
+          data-slider-min="10" 
+          data-slider-max="1000" 
+          data-slider-step="5" 
+          data-slider-value="[250,450]"/> 
+        <b>€ 1000</b>  
+    </div>
 </template>
 
 <script>
@@ -15,6 +22,9 @@ export default {
       errors: [],
       points:[]
     }
+  },
+  mounted(){
+    var slider = new Slider('#ex2', {});
   },
   created () {
     var self = this;
