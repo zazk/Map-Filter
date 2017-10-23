@@ -29,7 +29,7 @@
       </div>
       <!-- BOX FILTERS -->
       <div class="box--filter">
-        <span>ADVANCED FILTERS</span>
+        <span>ADVANCED FILTERS <i></i></span>
       </div>
 
       <div class="box-itm">
@@ -90,7 +90,7 @@ export default {
       var marker = new google.maps.Marker({
           position: myLatlng,
           map: map,
-          //icon:'img/icon-map.png'
+          // icon:'location.png'
       });
     }
     google.maps.event.addDomListener(window, 'load', initMaplima);   
@@ -102,12 +102,29 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   .box--filter{
-    background: #ccc;
+    background: #E8E8E8;
+    padding: 15px 10px;
+    border-bottom: 1px solid #D9D9D9;
+    position: relative;
+    font-weight: 500;
+    color:#797979;
+  }
+  .box--filter i{
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 4px 7px 4px;
+    border-color: transparent transparent #A7A7A7 transparent;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    right: 10px;
   }
   .aside--bar{
-    width: 30%;
+    width: 25%;
     height: 100vh;
-    background: #f1f1f1;
+    background: #F3F3F3;
     padding: 20px;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -115,7 +132,7 @@ export default {
     text-align: left;
   }
   .map{
-    width: 70%;
+    width: 75%;
     height: 100vh;
   }
   .box--price{
@@ -131,9 +148,11 @@ export default {
   }
   .box-itm{
     padding: 30px 0;
+    border-bottom: 1px solid #E2E2E2;
   }
   .box-itm h3{
     font-size: 16px;
     font-weight: bold;
+    color: #797979;
   }
 </style>
