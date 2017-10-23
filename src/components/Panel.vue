@@ -8,11 +8,19 @@
     <div class="box--flex">
       <aside class="aside--bar">
         <div class="box-itm">
-          <h3>LOCATION</h3>
-          <input type="text" class="form-control" placeholder="Enter a location e.g. Hamilton">
+          <h3>Distrito</h3>
+          <select name="" class="form-control" id="">
+            <option value="">Distrito</option>
+          </select>
         </div>
         <div class="box-itm">
-          <h3>PRICE RANGE</h3>
+          <h3>Estado</h3>
+          <select name="" class="form-control" id="">
+            <option value="">Estado</option>
+          </select>
+        </div>
+        <div class="box-itm">
+          <h3>Tamaño</h3>
           <input id="ex2" type="text" class="span2 input--slider_1" value="" 
             data-slider-min="10" 
             data-slider-max="1000" 
@@ -23,41 +31,124 @@
           </span>   
         </div>
         <div class="box-itm">
-          <h3>BEDROOMS</h3>
-          <input id="ex3" type="text" class="span2 input--slider_2" value="" 
-            data-slider-min="10" 
-            data-slider-max="1000" 
-            data-slider-step="5" 
-            data-slider-value="[250,450]"/>
-          <span class="box--price">
-            <b>€ 10</b>  <b>€ 1000</b> 
-          </span> 
-        </div>
-        <!-- BOX FILTERS -->
-        <div class="box--filter">
-          <span>ADVANCED FILTERS <i></i></span>
-        </div>
-
-        <div class="box-itm">
-          <h3>BATHROOMS</h3>
-          <input id="ex4" type="text" class="span2 input--slider_3" value="" 
-            data-slider-min="10" 
-            data-slider-max="1000" 
-            data-slider-step="5" 
-            data-slider-value="[250,450]"/>
-          <span class="box--price">
-            <b>€ 10</b>  <b>€ 1000</b> 
-          </span>
-        </div>
-        <div class="box-itm">
-          <h3>LEASE DURATION</h3>
-          <select class="form-control" name="" id="">
-            <option value="">8 Months</option>
+          <h3>Nombre de Via</h3>
+          <select name="" class="form-control" id="">
+            <option value="">Nombre de Via</option>
           </select>
         </div>
         <div class="box-itm">
-          <h3>LEASE DURATION</h3>
-          <input type="text" class="form-control" placeholder="Enter Date">
+          <h3>Urbanización</h3>
+          <select name="" class="form-control" id="">
+            <option value="">Urbanización</option>
+          </select>
+        </div>
+        <div class="box-itm">
+          <h3>Actividad</h3>
+          <div class="boxinput">
+            <input type="checkbox"> activa1
+          </div>
+          <div class="boxinput">
+            <input type="checkbox"> activa2
+          </div>
+          <div class="boxinput">
+            <input type="checkbox"> activa3
+          </div>
+          <div class="boxinput">
+            <input type="checkbox"> activa4
+          </div>
+          <div class="boxinput">
+            <input type="checkbox"> activa5
+          </div>
+          <div class="boxinput">
+            <input type="checkbox"> activa6
+          </div>
+          <div class="boxinput">
+            <input type="checkbox"> activa7
+          </div>
+          <div class="boxinput">
+            <input type="checkbox"> activa8
+          </div>
+          <div class="boxinput">
+            <input type="checkbox"> activa9
+          </div>
+          <div class="boxinput">
+            <input type="checkbox"> activa10
+          </div>
+          <div class="boxinput">
+            <input type="checkbox"> activa11
+          </div>
+          <div class="boxinput">
+            <input type="checkbox"> activa12
+          </div>
+          <div class="boxinput">
+            <input type="checkbox"> activa13
+          </div>
+          <div class="boxinput">
+            <input type="checkbox"> activa14
+          </div>
+          <div class="boxinput">
+            <input type="checkbox"> activa15
+          </div>
+          <div class="boxinput">
+            <input type="checkbox"> activa16
+          </div>
+          <div class="boxinput">
+            <input type="checkbox"> activa17
+          </div>
+          <div class="boxinput">
+            <input type="checkbox"> activa18
+          </div>
+          <div class="boxinput">
+            <input type="checkbox"> activa19
+          </div>
+          <div class="boxinput">
+            <input type="checkbox"> activa20
+          </div>
+        </div>
+        <div class="box-itm">
+          <h3>Edad</h3>
+          <div class="boxinput">
+            <input type="checkbox"> activa1
+          </div>
+          <div class="boxinput">
+            <input type="checkbox"> activa2
+          </div>
+          <div class="boxinput">
+            <input type="checkbox"> activa3
+          </div>
+          <div class="boxinput">
+            <input type="checkbox"> activa4
+          </div>
+        </div>
+        <div class="box-itm">
+          <h3>Educación</h3>
+          <div class="boxinput">
+            <input type="checkbox"> activa1
+          </div>
+          <div class="boxinput">
+            <input type="checkbox"> activa2
+          </div>
+          <div class="boxinput">
+            <input type="checkbox"> activa3
+          </div>
+          <div class="boxinput">
+            <input type="checkbox"> activa4
+          </div>
+        </div>
+        <div class="box-itm">
+          <h3>Cargo / Funciones</h3>
+          <div class="boxinput">
+            <input type="checkbox"> activa1
+          </div>
+          <div class="boxinput">
+            <input type="checkbox"> activa2
+          </div>
+          <div class="boxinput">
+            <input type="checkbox"> activa3
+          </div>
+          <div class="boxinput">
+            <input type="checkbox"> activa4
+          </div>
         </div>
       </aside>
       <div class="map" id="">
@@ -72,17 +163,14 @@
 
 <script>
 export default {
-  name: 'HelloWorld',
+  name: 'Panel',
   data () {
     return {
-      msg: ''
+      
     }
   },
   mounted (){
     var slider = new Slider('.input--slider_1', {});
-    var slider = new Slider('.input--slider_2', {});
-    var slider = new Slider('.input--slider_3', {});
-
      function initMaplima() {
       var $map = $( '#google-maplima' );
       if ( ! $map.length ) return;
@@ -151,7 +239,7 @@ export default {
   }
   .aside--bar{
     width: 25%;
-    height: 100vh;
+    height: 100%;
     background: #F3F3F3;
     padding: 20px;
     -webkit-box-sizing: border-box;
@@ -168,7 +256,7 @@ export default {
     position: absolute;
     top: 0;
     left: 0;
-    height: 100%;
+    height: 100vh;
     width: 100%;
   }
   .box--price{
@@ -190,5 +278,6 @@ export default {
     font-size: 16px;
     font-weight: bold;
     color: #797979;
+    font-family: 'arial', sanserif;
   }
 </style>
