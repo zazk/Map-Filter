@@ -54,7 +54,12 @@
         <input type="text" class="form-control" placeholder="Enter Date">
       </div>
     </aside>
-    <div class="map" id="google-maplima"></div>
+    <div class="map" id="">
+      <div id="google-maplima"></div>  
+      <div class="map--etiqueta">
+        <span>150 Listings Found</span>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -90,7 +95,7 @@ export default {
       var marker = new google.maps.Marker({
           position: myLatlng,
           map: map,
-          // icon:'location.png'
+          icon:'./assets/location.png'
       });
     }
     google.maps.event.addDomListener(window, 'load', initMaplima);   
@@ -101,6 +106,19 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+  .map--etiqueta{
+    position: absolute;
+    z-index: 600;
+    right: 0;
+    background: #fff;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 6px 0px 0px 6px;
+    color:#797979;
+    padding: 0px 10px 0px 30px;
+    text-align: right;
+    font-weight: bold;
+  }
   .box--filter{
     background: #E8E8E8;
     padding: 15px 10px;
@@ -134,6 +152,14 @@ export default {
   .map{
     width: 75%;
     height: 100vh;
+    position: relative;
+  }
+  .map #google-maplima{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
   }
   .box--price{
     display: block;
