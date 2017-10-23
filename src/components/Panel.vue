@@ -158,6 +158,9 @@
             <input type="checkbox"> activa4
           </div>
         </div>
+        <div class="btn_aside">
+          <button class="btn btn-primary">recargar filtros</button>
+        </div>
       </aside>
       <div class="map">
         <div id="google-maplima"></div>  
@@ -223,6 +226,10 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+  .btn_aside{
+    margin-top: 30px;
+    text-align: center;
+  }
   .boxinput{
     width: 48%;
     display: inline-block;
@@ -320,16 +327,16 @@ export default {
     box-sizing: border-box;
     text-align: left;
     overflow: auto;
-    transition: all .4s ease;
 
   }
   .map{
     width: 75%;
     height: calc(100vh - 60px);
     position: relative;
-    margin: 0 0 0 auto;
-    transition: all .4s ease;
   }
+  .map.active{
+      right: -300px;
+    }
   .map #google-maplima{
     position: absolute;
     top: 0;
@@ -373,20 +380,17 @@ export default {
       visibility: visible;
     }
     .aside--bar{
-      left: -350px;
+      left: -300px;
       position: absolute;
       top: 0;
-      width: 350px;
+      width: 300px;
     }
     .aside--bar.active{
       left: 0;
     }
     .map{
-      width: 700px;
+      width: 100%;
     }
-    .map.active{
-      width: calc(700px - 350px);
-      
-    }
+
   }
 </style>
