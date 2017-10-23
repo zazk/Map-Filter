@@ -159,7 +159,10 @@
           </div>
         </div>
         <div class="btn_aside">
-          <button class="btn btn-primary">recargar filtros</button>
+          <button class="btn btn-primary">
+            <img src="/static/reload.svg" width="15" height="15" alt="">
+            recargar filtros
+          </button>
         </div>
       </aside>
       <div class="map">
@@ -229,6 +232,11 @@ export default {
   .btn_aside{
     margin-top: 30px;
     text-align: center;
+    
+  }
+  .btn_aside img{
+    width: 15px;
+    height: 15px;
   }
   .boxinput{
     width: 48%;
