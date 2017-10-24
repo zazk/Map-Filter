@@ -174,16 +174,18 @@
     </div>
   </div>
 </template>
-
 <script>
+import axios from 'axios'
 export default {
   name: 'Panel',
   data () {
     return {
-      
+      location : []
     }
   },
-  mounted (){
+  mounted() {
+    this.getdatos()
+    // SCRIPT PARA ABRIR EL MENU RESPONSI Y CERRAR
     $('.menuH .menuopen').click(function(event) {
       $(this).addClass('active');
       $('.aside--bar').addClass('active');
@@ -196,10 +198,12 @@ export default {
       $('.map').removeClass('active');
       $('.aside--bar').removeClass('active');
     });
-
-
+    // END MENU
+    // SLIDER 
     var slider = new Slider('.input--slider_1', {});
-    var locations = [{
+    // MAPA
+    var locations = [
+      {
         "index": 0,
         "url": "Av. Angamos Este 180 Surquillo",
         "address": "Av. Angamos Este 180, Miraflores 15074, Peru",
@@ -207,178 +211,21 @@ export default {
             "lat": -12.1138421,
             "lng": -77.0289209
         }
-    }, {
-        "index": 5,
-        "url": "Av. Aviación 3995 Surquillo",
-        "address": "Av. Aviación 3995, Cercado de Lima 15038, Peru",
-        "points": {
-            "lat": -12.1159103,
-            "lng": -76.99928229999999
-        }
-    }, {
-        "index": 6,
-        "url": "Av. Aviación 4006 Surquillo",
-        "address": "Av. Aviación 4006, Surquillo 15038, Peru",
-        "points": {
-            "lat": -12.116441,
-            "lng": -76.999268
-        }
-    }, {
-        "index": 7,
-        "url": "Av. Aviación 4007 Surquillo",
-        "address": "Av. Aviación 4007, Surquillo 15038, Peru",
-        "points": {
-            "lat": -12.116282,
-            "lng": -76.998863
-        }
-    }, {
-        "index": 8,
-        "url": "Av. Aviación 4249 Surquillo",
-        "address": "Av. Aviación 4249, Cercado de Lima 15038, Peru",
-        "points": {
-            "lat": -12.1178371,
-            "lng": -76.99849809999999
-        }
-    }, {
-        "index": 9,
-        "url": "Av. Aviación 4377 Surquillo",
-        "address": "Av. Aviación 4377, Cercado de Lima 15038, Peru",
-        "points": {
-            "lat": -12.1185631,
-            "lng": -76.9982131
-        }
-    }, {
-        "index": 10,
-        "url": "Av. Aviación 4581 Surquillo",
-        "address": "Av. Aviación 4581, Cercado de Lima 15038, Peru",
-        "points": {
-            "lat": -12.1220252,
-            "lng": -76.9985305
-        }
-    }, {
-        "index": 11,
-        "url": "Av. Aviación Mz.b Lt.18 Surquillo",
-        "address": "Av. Aviación 18, Cercado de Lima 15018, Peru",
-        "points": {
-            "lat": -12.0572135,
-            "lng": -77.0147799
-        }
-    }, {
-        "index": 12,
-        "url": "Av. Domingo Orué 260 Surquillo",
-        "address": "Av. Domingo Orué 260, Surquillo 15047, Peru",
-        "points": {
-            "lat": -12.1070143,
-            "lng": -77.02228319999999
-        }
-    }, {
-        "index": 13,
-        "url": "Av. Domingo Orué 792 Surquillo",
-        "address": "Av. Domingo Orué 792, Surquillo 15047, Peru",
-        "points": {
-            "lat": -12.1062808,
-            "lng": -77.0199761
-        }
-    }, {
-        "index": 14,
-        "url": "Av. Federico Recavarren 855 Surquillo",
-        "address": "Calle Gral Federico Recavarren, Surquillo 15047, Peru",
-        "points": {
-            "lat": -12.1076692,
-            "lng": -77.0245187
-        }
-    }, {
-        "index": 15,
-        "url": "Av. Federico Recavarren 1150 Surquillo",
-        "address": "Calle Gral Federico Recavarren, Surquillo 15047, Peru",
-        "points": {
-            "lat": -12.1076692,
-            "lng": -77.0245187
-        }
-    }, {
-        "index": 16,
-        "url": "Av. Federico Recavarren 1273 Surquillo",
-        "address": "Calle Gral Federico Recavarren, Surquillo 15047, Peru",
-        "points": {
-            "lat": -12.1076692,
-            "lng": -77.0245187
-        }
-    }, {
-        "index": 17,
-        "url": "Av. Federico Recavarren 1281 Surquillo",
-        "address": "Calle Gral Federico Recavarren, Surquillo 15047, Peru",
-        "points": {
-            "lat": -12.1076692,
-            "lng": -77.0245187
-        }
-    }, {
-        "index": 18,
-        "url": "Av. Intihuantana 370 Surquillo",
-        "address": "Intihuatana 370, Cercado de Lima 15038, Peru",
-        "points": {
-            "lat": -12.1144244,
-            "lng": -76.99516059999999
-        }
-    }, {
-        "index": 19,
-        "url": "Av. Intihuantana 404 Surquillo",
-        "address": "Intihuatana 404, Surquillo 15038, Peru",
-        "points": {
-            "lat": -12.1146809,
-            "lng": -76.99542690000001
-        }
-    }, {
-        "index": 1,
-        "url": "Av. Angamos Este 181 Surquillo",
-        "address": "Av. Angamos Este 181, Miraflores 15074, Peru",
-        "points": {
-            "lat": -12.1138196,
-            "lng": -77.0307589
-        }
-    }, {
-        "index": 2,
-        "url": "Av. Angamos Este 2404 Surquillo",
-        "address": "Av. Angamos Este 2404, Surquillo 15036, Peru",
-        "points": {
-            "lat": -12.1121609,
-            "lng": -77.0031999
-        }
-    }, {
-        "index": 3,
-        "url": "Av. Aviación 3939 Surquillo",
-        "address": "Av. Aviación 3939, Cercado de Lima 15038, Peru",
-        "points": {
-            "lat": -12.114919,
-            "lng": -76.9991873
-        }
-    }, {
-        "index": 4,
-        "url": "Av. Aviación 3942 Surquillo",
-        "address": "Av. Aviación 3942, Cercado de Lima 15038, Peru",
-        "points": {
-            "lat": -12.1148864,
-            "lng": -76.99965929999999
-        }
-    }];
-
-
+      } 
+    ];
     var map = new google.maps.Map(document.getElementById('google-maplima'), {
       zoom: 14,
       center: new google.maps.LatLng(locations[0]['points']['lat'], locations[0]['points']['lng']),
       mapTypeId: google.maps.MapTypeId.ROADMAP
     });
-
     var infowindow = new google.maps.InfoWindow();
-
     var marker, i;
-
     for (i = 0; i < locations.length; i++) {  
       marker = new google.maps.Marker({
         position: new google.maps.LatLng(locations[i]['points']['lat'], locations[i]['points']['lng']),
         map: map,
         icon:'/static/location.png'
       });
-
       google.maps.event.addListener(marker, 'click', (function(marker, i) {
         return function() {
           infowindow.setContent(locations[i]['url']);
@@ -386,8 +233,17 @@ export default {
         }
       })(marker, i));
     }
+  },
+  methods:{
+    getdatos(){
+      let url = 'http://w.areminds.com/api/parse.php';
+      axios.get(url)
+        .then((respuesta) => {
+          this.location = respuesta.data;
+        })
+        console.log('datos', location);
+    }
   }
-
 }
 </script>
 

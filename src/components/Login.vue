@@ -32,15 +32,6 @@ export default {
     }
   },
   mounted (){
-    // document.getElementById("check--input").addEventListener("change", function(e){
-    //     var pwd = document.getElementById("input_password");
-    //     if(pwd.getAttribute("type")=="password"){
-    //       pwd.setAttribute("type","text");
-    //     } else {
-    //       pwd.setAttribute("type","password");
-    //     }
-    // });
-    
     $('#form_login').submit(function(e) {
       e.preventDefault()
       let usuario = "mauricio",
