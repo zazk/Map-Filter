@@ -168,7 +168,7 @@
       <div class="map">
         <div id="google-maplima"></div>  
         <div class="map--etiqueta">
-          <span>150 Listings Found</span>
+          <span>{{location.length}} Listings Found </span>
         </div>
       </div>
     </div>
@@ -201,45 +201,37 @@ export default {
     // END MENU
     // SLIDER 
     var slider = new Slider('.input--slider_1', {});
-    // MAPA
-    var locations = [
-      {
-        "index": 0,
-        "url": "Av. Angamos Este 180 Surquillo",
-        "address": "Av. Angamos Este 180, Miraflores 15074, Peru",
-        "points": {
-            "lat": -12.1138421,
-            "lng": -77.0289209
-        }
-      } 
-    ];
-    var map = new google.maps.Map(document.getElementById('google-maplima'), {
-      zoom: 14,
-      center: new google.maps.LatLng(locations[0]['points']['lat'], locations[0]['points']['lng']),
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-    });
-    var infowindow = new google.maps.InfoWindow();
-    var marker, i;
-    for (i = 0; i < locations.length; i++) {  
-      marker = new google.maps.Marker({
-        position: new google.maps.LatLng(locations[i]['points']['lat'], locations[i]['points']['lng']),
-        map: map,
-        icon:'/static/location.png'
-      });
-      google.maps.event.addListener(marker, 'click', (function(marker, i) {
-        return function() {
-          infowindow.setContent(locations[i]['url']);
-          infowindow.open(map, marker);
-        }
-      })(marker, i));
-    }
   },
   methods:{
     getdatos(){
       let url = 'http://w.areminds.com/api/parse.php';
       axios.get(url)
         .then((respuesta) => {
-          this.location = respuesta.data;
+          this.location = respuesta.data.locations;
+          var locations = respuesta.data.locations;
+          // MAPA
+          
+          var map = new google.maps.Map(document.getElementById('google-maplima'), {
+            zoom: 14,
+            center: new google.maps.LatLng(locations[0]['latitud'], locations[0]['longitud']),
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+          });
+          var infowindow = new google.maps.InfoWindow();
+
+          var marker, i;
+          for (i = 0; i < locations.length; i++) {  
+            marker = new google.maps.Marker({
+              position: new google.maps.LatLng(locations[i]['latitud'], locations[i]['longitud']),
+              map: map,
+              icon:'/static/location.png'
+            });
+            google.maps.event.addListener(marker, 'click', (function(marker, i) {
+              return function() {
+                infowindow.setContent(locations[i]['direccion_nombre_de_la_via']);
+                infowindow.open(map, marker);
+              }
+            })(marker, i));
+          }
         })
         console.log('datos',location);
     }
