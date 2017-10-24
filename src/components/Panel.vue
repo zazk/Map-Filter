@@ -241,7 +241,7 @@ export default {
         .then((respuesta) => {
           this.location = respuesta.data;
         })
-        console.log('datos', location);
+        console.log('datos',location);
     }
   }
 }
