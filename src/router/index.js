@@ -19,8 +19,8 @@ export default new Router({
       component: Login
     },
     {
-      path: '/',
-      name: 'map',
+      path: '/map',
+      name: 'Map',
       component: Map
     }
   ]
