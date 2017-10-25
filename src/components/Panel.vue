@@ -212,7 +212,8 @@ export default {
       $('.aside--bar').removeClass('active');
     });
     // END MENU
-      
+
+    
   },
   
   methods:{
@@ -325,6 +326,13 @@ export default {
           return function() {
             infowindow.setContent(
               '<h4>' + locations[i].nombre_del_establecimiento+ '</h4>' +
+              '<form x-update-points>'+
+              'Latitud: <input name="latitud" x-latitud value="'+ locations[i].latitud +'" /> '+
+              'Longitud: <input name="latitud" x-longitud value="'+ locations[i].longitud +'" />'+
+              '<input type="hidden" name="id" x-id value="'+ locations[i].id +'" />'+
+              '<br>'+
+              '<button x-update >Refresh Points</button> '+ 
+              '<form>'+
               'ID:'+ locations[i].id +
               '<br>'+
               'Distrito: ' +locations[i].distrito +
@@ -354,6 +362,23 @@ export default {
               locations[i].informante_email
             );
             infowindow.open(map, marker);
+
+            // Update Points
+         
+            $('[x-update-points]').on('submit',function(e){
+              e.preventDefault();
+              let longitud = $('[x-longitud]');
+              let latitud = $('[x-latitud]');
+              let id = $('[x-id]');
+              let url = "http://w.areminds.com/api/parse.php?" + $('[x-update-points]').serialize();
+              console.log('sent points', longitud,latitud, id, 'url:', url);
+              axios.get(url)
+                .then((r) => { 
+                  console.log("Response", r);
+                });
+
+            })
+            //---------
           }
         })(marker, i));
       }
