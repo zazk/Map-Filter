@@ -29,6 +29,15 @@
             <option v-for="estado in estados" value="">{{estado.estado}}</option>
           </select>
         </div>
+          <div class="box-itm">
+            <h3>Educación</h3>
+            <template v-for="educacion in educacion">
+              <div class="boxinput">
+                <input type="checkbox">{{ educacion.educacion }}
+              </div>
+            </template>
+            
+          </div>        
         <div style="display:none">
           <div class="box-itm">
             <h3>Tamaño</h3>
@@ -131,21 +140,7 @@
               <input type="checkbox"> activa4
             </div>
           </div>
-          <div class="box-itm">
-            <h3>Educación</h3>
-            <div class="boxinput">
-              <input type="checkbox"> activa1
-            </div>
-            <div class="boxinput">
-              <input type="checkbox"> activa2
-            </div>
-            <div class="boxinput">
-              <input type="checkbox"> activa3
-            </div>
-            <div class="boxinput">
-              <input type="checkbox"> activa4
-            </div>
-          </div>
+
           <div class="box-itm">
             <h3>Cargo / Funciones</h3>
             <div class="boxinput">
@@ -197,6 +192,7 @@ export default {
       estados :[],
       districts :[],
       edad :0,
+      educacion :[],
     }
   },
   mounted() {
@@ -229,6 +225,8 @@ export default {
           this.estados = respuesta.data.estados;
           this.districts = respuesta.data.distritos;
           this.edad = respuesta.data.edad;
+          this.educacion = respuesta.data.educacion;
+          console.log('educacion', respuesta.data.educacion)
 
 
           // SLIDER 
@@ -499,7 +497,7 @@ export default {
     position: absolute;
     top: 0;
     left: 0;
-    height: 100vh;
+    height: calc(100vh - 60px);
     width: 100%;
   }
   .box--price{
