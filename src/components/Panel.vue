@@ -29,27 +29,27 @@
             <option v-for="estado in estados" value="">{{estado.estado}}</option>
           </select>
         </div>
+        <div class="box-itm">
+          <h3>Educación</h3>
+          <template v-for="educacion in educacion">
+            <div class="boxinput">
+              <input type="checkbox">{{ educacion.educacion }}
+            </div>
+          </template>
+        </div>        
           <div class="box-itm">
-            <h3>Educación</h3>
-            <template v-for="educacion in educacion">
-              <div class="boxinput">
-                <input type="checkbox">{{ educacion.educacion }}
-              </div>
-            </template>
-            
-          </div>        
-        <div style="display:none">
-          <div class="box-itm">
-            <h3>Tamaño</h3>
+            <h3>Edad</h3>
             <input id="ex2" type="text" class="span2 input--slider_1" value="" 
-              data-slider-min="0" 
-              :data-slider-max="edad.edad" 
-              data-slider-step="5" 
-              data-slider-value="[0,50]"/>
+              data-slider-min="10" 
+              data-slider-max="80" 
+              data-slider-step="5"
+              data-slider-value="[10,80]"
+               />
             <span class="box--price">
-              <b>€ 10</b>  <b>€ 1000</b> 
+              <b>10</b>  <b>{{edad.edad}}</b> 
             </span>   
           </div>
+        <div style="display:none">
           <div class="box-itm">
             <h3>Nombre de Via</h3>
             <select name="" class="form-control" id="">
@@ -219,6 +219,7 @@ export default {
     
     getdatos(){
       let url = 'http://w.areminds.com/api/parse.php';
+      self = this;
       axios.get(url)
 
         .then((respuesta) => {
@@ -229,18 +230,39 @@ export default {
           console.log('educacion', respuesta.data.educacion)
 
 
-          // SLIDER 
-          var slider = new Slider('.input--slider_1', {});
 
           // MAPA
           var locations = respuesta.data.locations;
           this.locations = locations;
           
-
           // Create Marks
           this.createMarkers( locations, this.createMap() );
+
+          // SLIDER 
+          var slider = new Slider('.input--slider_1', {tooltip:'always'}).on("slideStop", function(sliderValue) {
+
+            console.log("Slider Value",sliderValue);
+            self.addFilterRange( sliderValue[0],sliderValue[1],'edad_1');
+          });
         })
         console.log('datos',location);
+
+    },
+
+    addFilterRange( min, max, criteria ){
+      var rows = [];
+
+      console.log("Min, Max, Criteria",min, max, this.locations[0]);
+
+      for (var i = 0, t = this.locations.length; i < t; i++) {  
+        var loc = this.locations[i];
+        if( loc[criteria] >= min && loc[criteria] <= max ){
+          rows.push(loc);
+        }
+      }
+
+      //Add New Markers
+      this.createMarkers( rows, this.createMap() );
 
     },
 
