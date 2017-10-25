@@ -167,6 +167,11 @@
       </aside>
       <div class="map">
         <div id="google-maplima"></div>  
+        <div class="preload" style="display: none;">
+          <div class="imgpreload">
+            <img src="/static/preload.gif" alt="">
+          </div>
+        </div>
         <div class="map--etiqueta">
           <span>{{location.length}} Listings Found </span>
         </div>
@@ -184,6 +189,7 @@ export default {
     }
   },
   mounted() {
+
     this.getdatos()
     // SCRIPT PARA ABRIR EL MENU RESPONSI Y CERRAR
     $('.menuH .menuopen').click(function(event) {
@@ -201,11 +207,15 @@ export default {
     // END MENU
     // SLIDER 
     var slider = new Slider('.input--slider_1', {});
+      
   },
+  
   methods:{
+    
     getdatos(){
       let url = 'http://w.areminds.com/api/parse.php';
       axios.get(url)
+
         .then((respuesta) => {
           this.location = respuesta.data.locations;
           var locations = respuesta.data.locations;
@@ -223,24 +233,77 @@ export default {
             marker = new google.maps.Marker({
               position: new google.maps.LatLng(locations[i]['latitud'], locations[i]['longitud']),
               map: map,
-              icon:'/static/location.png'
+              icon:'/static/location.jpg'
             });
             google.maps.event.addListener(marker, 'click', (function(marker, i) {
+              
               return function() {
-                infowindow.setContent(locations[i]['direccion_nombre_de_la_via']);
+                infowindow.setContent(
+                  '<strong>' + locations[i].nombre_del_establecimiento+ '</strong>' +
+                  '<br>'+
+                  'Distrito: ' +locations[i].distrito +
+                  '<br>'+
+                  'Fecha: ' +locations[i].fecha +
+                  '<br>'+
+                  'Estado: ' +locations[i].estado +
+                  '<br>'+
+                  'Razon Social: ' +locations[i].razon_social_del_establecimiento +
+                  '<br>'+
+                  'Celular: ' +locations[i].celular_local_1+' '+locations[i].celular_local_2+' '+locations[i].celular_local_3+
+                  '<br>'+
+                  'Telefono: ' +locations[i].telefonos_local_1+' '+locations[i].telefonos_local_1+' '+locations[i].telefonos_local_1+
+                  '<br>'+
+                  'Tamaño: ' +locations[i].tamano_frente_m2+' '+locations[i].tamano_fondo_m2+
+                  '<br>'+
+                  'Direccion: ' +locations[i].direccion_nombre_de_la_via+' '+locations[i].direccion_enumeracion+' '+locations[i].direccion_nro_interior+' '+locations[i].direccion_urbanizacion+' '+locations[i].direccion_referencia_1+' '+locations[i].direccion_referencia_2+' '+locations[i].direccion_referencia_3+
+                  '<br>'+
+                  'Propietario: ' +locations[i].propietario_nombres+' '+locations[i].propietario_apellido_paterno+' '+locations[i].propietario_apellido_materno+
+                  '<br>'+
+                  'Aministrador: ' +locations[i].administrador_nombres+' '+locations[i].administrador_apellido_paterno+' '+locations[i].administrador_apellido_materno+
+                  '<br>'+
+                  'Informante: ' +locations[i].informante_nombres+' '+locations[i].informante_apellido_paterno+' '+locations[i].informante_apellido_materno+'<br>'+
+                  locations[i].informante_telefonos+'<br>'+
+                  locations[i].informante_celular+'<br>'+
+                  locations[i].informante_edad+'<br>'+
+                  locations[i].informante_email
+                );
                 infowindow.open(map, marker);
               }
             })(marker, i));
+            
           }
+
         })
         console.log('datos',location);
+
     }
   }
 }
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+  .preload{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 200;
+    margin: auto;
+    background: #fff;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    -ms-align-items: center;
+    align-items: center;
+    justify-content: center;
+  }
   .btn_aside{
     margin-top: 30px;
     text-align: center;
