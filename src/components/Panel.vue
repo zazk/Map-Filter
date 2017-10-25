@@ -167,7 +167,7 @@
       </aside>
       <div class="map">
         <div id="google-maplima"></div>  
-        <div class="preload" style="display: none;">
+        <div class="preload" style="">
           <div class="imgpreload">
             <img src="/static/preload.gif" alt="">
           </div>
@@ -273,6 +273,7 @@ export default {
             
           }
 
+          $('.preload').css('opacity', '0');
         })
         console.log('datos',location);
 
