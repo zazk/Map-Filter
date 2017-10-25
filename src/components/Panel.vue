@@ -3,177 +3,181 @@
     <nav class="navheader">
       <div class="menuH">
         <span class="menuopen">
-          <img src="/static/menu.svg" width="25" height="25" alt="">  
+          <img src="static/menu.svg" width="25" height="25" alt="">  
         </span>
         <span class="menuclose">
-          <img src="/static/close.svg" width="25" height="25" alt="">
+          <img src="static/close.svg" width="25" height="25" alt="">
         </span>
       </div> 
       <a class="nav--logo" href="">
-        <img src="/static/logo.png" width="" height="40" alt="">
+        <img src="static/logo.png" width="" height="40" alt="">
       </a>
     </nav>
     <div class="box--flex">
       <aside class="aside--bar">
         <div class="box-itm">
           <h3>Distrito</h3>
-          <select name="" class="form-control" id="">
-            <option value="">Distrito</option>
+          <select name="" class="form-control" id="" @change="addFilter($event)">
+            <option>Todos</option>
+            <option v-for="distrito in districts" :value="distrito.distrito">{{distrito.distrito}}</option>
           </select>
         </div>
         <div class="box-itm">
-          <h3>Estado</h3>
-          <select name="" class="form-control" id="">
-            <option value="">Estado</option>
+          <h3>Estado</h3> 
+          <select name="" class="form-control" id="" @change="addFilter($event)">  
+            <option>Todos</option>
+            <option v-for="estado in estados" value="">{{estado.estado}}</option>
           </select>
         </div>
-        <div class="box-itm">
-          <h3>Tamaño</h3>
-          <input id="ex2" type="text" class="span2 input--slider_1" value="" 
-            data-slider-min="10" 
-            data-slider-max="1000" 
-            data-slider-step="5" 
-            data-slider-value="[250,450]"/>
-          <span class="box--price">
-            <b>€ 10</b>  <b>€ 1000</b> 
-          </span>   
-        </div>
-        <div class="box-itm">
-          <h3>Nombre de Via</h3>
-          <select name="" class="form-control" id="">
-            <option value="">Nombre de Via</option>
-          </select>
-        </div>
-        <div class="box-itm">
-          <h3>Urbanización</h3>
-          <select name="" class="form-control" id="">
-            <option value="">Urbanización</option>
-          </select>
-        </div>
-        <div class="box-itm">
-          <h3>Actividad</h3>
-          <div class="boxinput">
-            <input type="checkbox"> activa1
+        <div style="display:none">
+          <div class="box-itm">
+            <h3>Tamaño</h3>
+            <input id="ex2" type="text" class="span2 input--slider_1" value="" 
+              data-slider-min="0" 
+              :data-slider-max="edad.edad" 
+              data-slider-step="5" 
+              data-slider-value="[0,50]"/>
+            <span class="box--price">
+              <b>€ 10</b>  <b>€ 1000</b> 
+            </span>   
           </div>
-          <div class="boxinput">
-            <input type="checkbox"> activa2
+          <div class="box-itm">
+            <h3>Nombre de Via</h3>
+            <select name="" class="form-control" id="">
+              <option value="">Nombre de Via</option>
+            </select>
           </div>
-          <div class="boxinput">
-            <input type="checkbox"> activa3
+          <div class="box-itm">
+            <h3>Urbanización</h3>
+            <select name="" class="form-control" id="">
+              <option value="">Urbanización</option>
+            </select>
           </div>
-          <div class="boxinput">
-            <input type="checkbox"> activa4
+          <div class="box-itm">
+            <h3>Actividad</h3>
+            <div class="boxinput">
+              <input type="checkbox"> activa1
+            </div>
+            <div class="boxinput">
+              <input type="checkbox"> activa2
+            </div>
+            <div class="boxinput">
+              <input type="checkbox"> activa3
+            </div>
+            <div class="boxinput">
+              <input type="checkbox"> activa4
+            </div>
+            <div class="boxinput">
+              <input type="checkbox"> activa5
+            </div>
+            <div class="boxinput">
+              <input type="checkbox"> activa6
+            </div>
+            <div class="boxinput">
+              <input type="checkbox"> activa7
+            </div>
+            <div class="boxinput">
+              <input type="checkbox"> activa8
+            </div>
+            <div class="boxinput">
+              <input type="checkbox"> activa9
+            </div>
+            <div class="boxinput">
+              <input type="checkbox"> activa10
+            </div>
+            <div class="boxinput">
+              <input type="checkbox"> activa11
+            </div>
+            <div class="boxinput">
+              <input type="checkbox"> activa12
+            </div>
+            <div class="boxinput">
+              <input type="checkbox"> activa13
+            </div>
+            <div class="boxinput">
+              <input type="checkbox"> activa14
+            </div>
+            <div class="boxinput">
+              <input type="checkbox"> activa15
+            </div>
+            <div class="boxinput">
+              <input type="checkbox"> activa16
+            </div>
+            <div class="boxinput">
+              <input type="checkbox"> activa17
+            </div>
+            <div class="boxinput">
+              <input type="checkbox"> activa18
+            </div>
+            <div class="boxinput">
+              <input type="checkbox"> activa19
+            </div>
+            <div class="boxinput">
+              <input type="checkbox"> activa20
+            </div>
           </div>
-          <div class="boxinput">
-            <input type="checkbox"> activa5
+          <div class="box-itm">
+            <h3>Edad</h3>
+            <div class="boxinput">
+              <input type="checkbox"> activa1
+            </div>
+            <div class="boxinput">
+              <input type="checkbox"> activa2
+            </div>
+            <div class="boxinput">
+              <input type="checkbox"> activa3
+            </div>
+            <div class="boxinput">
+              <input type="checkbox"> activa4
+            </div>
           </div>
-          <div class="boxinput">
-            <input type="checkbox"> activa6
+          <div class="box-itm">
+            <h3>Educación</h3>
+            <div class="boxinput">
+              <input type="checkbox"> activa1
+            </div>
+            <div class="boxinput">
+              <input type="checkbox"> activa2
+            </div>
+            <div class="boxinput">
+              <input type="checkbox"> activa3
+            </div>
+            <div class="boxinput">
+              <input type="checkbox"> activa4
+            </div>
           </div>
-          <div class="boxinput">
-            <input type="checkbox"> activa7
+          <div class="box-itm">
+            <h3>Cargo / Funciones</h3>
+            <div class="boxinput">
+              <input type="checkbox"> activa1
+            </div>
+            <div class="boxinput">
+              <input type="checkbox"> activa2
+            </div>
+            <div class="boxinput">
+              <input type="checkbox"> activa3
+            </div>
+            <div class="boxinput">
+              <input type="checkbox"> activa4
+            </div>
           </div>
-          <div class="boxinput">
-            <input type="checkbox"> activa8
+          <div class="btn_aside">
+            <button class="btn btn-primary">
+              <img src="static/reload.svg" width="15" height="15" alt="">
+              recargar filtros
+            </button>
           </div>
-          <div class="boxinput">
-            <input type="checkbox"> activa9
-          </div>
-          <div class="boxinput">
-            <input type="checkbox"> activa10
-          </div>
-          <div class="boxinput">
-            <input type="checkbox"> activa11
-          </div>
-          <div class="boxinput">
-            <input type="checkbox"> activa12
-          </div>
-          <div class="boxinput">
-            <input type="checkbox"> activa13
-          </div>
-          <div class="boxinput">
-            <input type="checkbox"> activa14
-          </div>
-          <div class="boxinput">
-            <input type="checkbox"> activa15
-          </div>
-          <div class="boxinput">
-            <input type="checkbox"> activa16
-          </div>
-          <div class="boxinput">
-            <input type="checkbox"> activa17
-          </div>
-          <div class="boxinput">
-            <input type="checkbox"> activa18
-          </div>
-          <div class="boxinput">
-            <input type="checkbox"> activa19
-          </div>
-          <div class="boxinput">
-            <input type="checkbox"> activa20
-          </div>
-        </div>
-        <div class="box-itm">
-          <h3>Edad</h3>
-          <div class="boxinput">
-            <input type="checkbox"> activa1
-          </div>
-          <div class="boxinput">
-            <input type="checkbox"> activa2
-          </div>
-          <div class="boxinput">
-            <input type="checkbox"> activa3
-          </div>
-          <div class="boxinput">
-            <input type="checkbox"> activa4
-          </div>
-        </div>
-        <div class="box-itm">
-          <h3>Educación</h3>
-          <div class="boxinput">
-            <input type="checkbox"> activa1
-          </div>
-          <div class="boxinput">
-            <input type="checkbox"> activa2
-          </div>
-          <div class="boxinput">
-            <input type="checkbox"> activa3
-          </div>
-          <div class="boxinput">
-            <input type="checkbox"> activa4
-          </div>
-        </div>
-        <div class="box-itm">
-          <h3>Cargo / Funciones</h3>
-          <div class="boxinput">
-            <input type="checkbox"> activa1
-          </div>
-          <div class="boxinput">
-            <input type="checkbox"> activa2
-          </div>
-          <div class="boxinput">
-            <input type="checkbox"> activa3
-          </div>
-          <div class="boxinput">
-            <input type="checkbox"> activa4
-          </div>
-        </div>
-        <div class="btn_aside">
-          <button class="btn btn-primary">
-            <img src="/static/reload.svg" width="15" height="15" alt="">
-            recargar filtros
-          </button>
         </div>
       </aside>
       <div class="map">
         <div id="google-maplima"></div>  
         <div class="preload" style="">
           <div class="imgpreload">
-            <img src="/static/preload.gif" alt="">
+            <img src="static/preload.gif" alt="">
           </div>
         </div>
         <div class="map--etiqueta">
-          <span>{{location.length}} Listings Found </span>
+          <span>{{total}} Listings Found </span>
         </div>
       </div>
     </div>
@@ -185,7 +189,14 @@ export default {
   name: 'Panel',
   data () {
     return {
-      location : []
+      mapa:null,
+      markerCluster:null,
+      total:0,
+      locations : [],
+      location : [],
+      estados :[],
+      districts :[],
+      edad :0,
     }
   },
   mounted() {
@@ -205,8 +216,6 @@ export default {
       $('.aside--bar').removeClass('active');
     });
     // END MENU
-    // SLIDER 
-    var slider = new Slider('.input--slider_1', {});
       
   },
   
@@ -217,66 +226,131 @@ export default {
       axios.get(url)
 
         .then((respuesta) => {
-          this.location = respuesta.data.locations;
-          var locations = respuesta.data.locations;
+          this.estados = respuesta.data.estados;
+          this.districts = respuesta.data.distritos;
+          this.edad = respuesta.data.edad;
+
+
+          // SLIDER 
+          var slider = new Slider('.input--slider_1', {});
+
           // MAPA
+          var locations = respuesta.data.locations;
+          this.locations = locations;
           
-          var map = new google.maps.Map(document.getElementById('google-maplima'), {
-            zoom: 14,
-            center: new google.maps.LatLng(locations[0]['latitud'], locations[0]['longitud']),
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-          });
-          var infowindow = new google.maps.InfoWindow();
 
-          var marker, i;
-          for (i = 0; i < locations.length; i++) {  
-            marker = new google.maps.Marker({
-              position: new google.maps.LatLng(locations[i]['latitud'], locations[i]['longitud']),
-              map: map,
-              icon:'/static/location.jpg'
-            });
-            google.maps.event.addListener(marker, 'click', (function(marker, i) {
-              
-              return function() {
-                infowindow.setContent(
-                  '<strong>' + locations[i].nombre_del_establecimiento+ '</strong>' +
-                  '<br>'+
-                  'Distrito: ' +locations[i].distrito +
-                  '<br>'+
-                  'Fecha: ' +locations[i].fecha +
-                  '<br>'+
-                  'Estado: ' +locations[i].estado +
-                  '<br>'+
-                  'Razon Social: ' +locations[i].razon_social_del_establecimiento +
-                  '<br>'+
-                  'Celular: ' +locations[i].celular_local_1+' '+locations[i].celular_local_2+' '+locations[i].celular_local_3+
-                  '<br>'+
-                  'Telefono: ' +locations[i].telefonos_local_1+' '+locations[i].telefonos_local_1+' '+locations[i].telefonos_local_1+
-                  '<br>'+
-                  'Tamaño: ' +locations[i].tamano_frente_m2+' '+locations[i].tamano_fondo_m2+
-                  '<br>'+
-                  'Direccion: ' +locations[i].direccion_nombre_de_la_via+' '+locations[i].direccion_enumeracion+' '+locations[i].direccion_nro_interior+' '+locations[i].direccion_urbanizacion+' '+locations[i].direccion_referencia_1+' '+locations[i].direccion_referencia_2+' '+locations[i].direccion_referencia_3+
-                  '<br>'+
-                  'Propietario: ' +locations[i].propietario_nombres+' '+locations[i].propietario_apellido_paterno+' '+locations[i].propietario_apellido_materno+
-                  '<br>'+
-                  'Aministrador: ' +locations[i].administrador_nombres+' '+locations[i].administrador_apellido_paterno+' '+locations[i].administrador_apellido_materno+
-                  '<br>'+
-                  'Informante: ' +locations[i].informante_nombres+' '+locations[i].informante_apellido_paterno+' '+locations[i].informante_apellido_materno+'<br>'+
-                  locations[i].informante_telefonos+'<br>'+
-                  locations[i].informante_celular+'<br>'+
-                  locations[i].informante_edad+'<br>'+
-                  locations[i].informante_email
-                );
-                infowindow.open(map, marker);
-              }
-            })(marker, i));
-            
-          }
-
-          $('.preload').css('display', 'none');
+          // Create Marks
+          this.createMarkers( locations, this.createMap() );
         })
         console.log('datos',location);
 
+    },
+
+    addFilter( event ){
+      var criteria = event.target.value;
+      var rows = [];
+
+      console.log(event.target.value);
+
+      for (var i = 0, t = this.locations.length; i < t; i++) {  
+        var loc = this.locations[i];
+        if( criteria == loc.distrito ){
+          rows.push(loc);
+        }
+      }
+
+      //Add New Markers
+      this.createMarkers( rows, this.createMap() );
+
+    },
+
+    createMap(){
+      return new google.maps.Map(document.getElementById('google-maplima'), {
+        zoom: 14,
+        center: new google.maps.LatLng(this.locations[0]['latitud'], this.locations[0]['longitud']),
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      });
+    },
+
+    createMarkers( locations, map ){
+      console.log("Create Markers");
+
+      // Info Windows to Show Marker Information
+      var infowindow = new google.maps.InfoWindow();
+      // Square to use to center the map
+      var bounds = new google.maps.LatLngBounds();
+
+      var marker, markers =[], i;
+      for (var i = 0, t = locations.length; i < t; i++) {
+        
+        // Set Coordinates  
+        var myLatLng = new google.maps.LatLng(locations[i]['latitud'], locations[i]['longitud']);
+        
+        // Create Marker for each point
+        marker = new google.maps.Marker({
+          position: myLatLng,
+          //map: map,
+          icon:'./static/map/location.png'
+        });
+
+        // extend the size of the map
+        bounds.extend(myLatLng);
+        
+        //Create Array of Markers
+        markers.push( marker );
+
+        //Create event
+        google.maps.event.addListener(marker, 'click', (function(marker, i) {
+          
+          return function() {
+            infowindow.setContent(
+              '<h4>' + locations[i].nombre_del_establecimiento+ '</h4>' +
+              'ID:'+ locations[i].id +
+              '<br>'+
+              'Distrito: ' +locations[i].distrito +
+              '<br>'+
+              'Fecha: ' +locations[i].fecha +
+              '<br>'+
+              'Estado: ' +locations[i].estado +
+              '<br>'+
+              'Razon Social: ' +locations[i].razon_social_del_establecimiento +
+              '<br>'+
+              'Celular: ' +locations[i].celular_local_1+' '+locations[i].celular_local_2+' '+locations[i].celular_local_3+
+              '<br>'+
+              'Telefono: ' +locations[i].telefonos_local_1+' '+locations[i].telefonos_local_1+' '+locations[i].telefonos_local_1+
+              '<br>'+
+              'Tamaño: ' +locations[i].tamano_frente_m2+' '+locations[i].tamano_fondo_m2+
+              '<br>'+
+              'Direccion: ' +locations[i].direccion_nombre_de_la_via+' '+locations[i].direccion_enumeracion+' '+locations[i].direccion_nro_interior+' '+locations[i].direccion_urbanizacion+' '+locations[i].direccion_referencia_1+' '+locations[i].direccion_referencia_2+' '+locations[i].direccion_referencia_3+
+              '<br>'+
+              'Propietario: ' +locations[i].propietario_nombres+' '+locations[i].propietario_apellido_paterno+' '+locations[i].propietario_apellido_materno+
+              '<br>'+
+              'Aministrador: ' +locations[i].administrador_nombres+' '+locations[i].administrador_apellido_paterno+' '+locations[i].administrador_apellido_materno+
+              '<br>'+
+              'Informante: ' +locations[i].informante_nombres+' '+locations[i].informante_apellido_paterno+' '+locations[i].informante_apellido_materno+'<br>'+
+              locations[i].informante_telefonos+'<br>'+
+              locations[i].informante_celular+'<br>'+
+              locations[i].informante_edad+'<br>'+
+              locations[i].informante_email
+            );
+            infowindow.open(map, marker);
+          }
+        })(marker, i));
+      }
+
+      // Add a marker clusterer to manage the markers.
+      this.markerCluster = new MarkerClusterer(map, markers, {
+        imagePath: './static/map/m'
+      });
+
+      //Center to Map Size
+      map.fitBounds(bounds);
+
+      // Set the total Results
+      this.total = locations.length;
+
+      // Remove Loading
+      $('.preload').css('display', 'none');
     }
   }
 }
