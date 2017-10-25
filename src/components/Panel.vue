@@ -191,7 +191,7 @@ export default {
       location : [],
       estados :[],
       districts :[],
-      edad :0,
+      edad :{edad:0},
       educacion :[],
     }
   },
@@ -328,7 +328,7 @@ export default {
               '<h4>' + locations[i].nombre_del_establecimiento+ '</h4>' +
               '<form x-update-points>'+
               'Latitud: <input name="latitud" x-latitud value="'+ locations[i].latitud +'" /> '+
-              'Longitud: <input name="latitud" x-longitud value="'+ locations[i].longitud +'" />'+
+              'Longitud: <input name="longitud" x-longitud value="'+ locations[i].longitud +'" />'+
               '<input type="hidden" name="id" x-id value="'+ locations[i].id +'" />'+
               '<br>'+
               '<button x-update >Refresh Points</button> '+ 
