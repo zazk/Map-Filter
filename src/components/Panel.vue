@@ -375,6 +375,7 @@ export default {
               axios.get(url)
                 .then((r) => { 
                   console.log("Response", r);
+                  alert(r);
                 });
 
             })
