@@ -37,7 +37,7 @@
             </div>
           </template>
         </div>        
-          <div class="box-itm">
+          <div class="box-itm tooltip_1">
             <h3>Edad</h3>
             <input id="ex2" type="text" class="span2 input--slider_1" value="" 
               data-slider-min="10" 
@@ -172,7 +172,7 @@
           </div>
         </div>
         <div class="map--etiqueta">
-          <span>{{total}} Puntos Encontrados</span>
+          <span>{{total}} Puntos</span>
         </div>
       </div>
     </div>
@@ -192,11 +192,10 @@ export default {
       estados :[],
       districts :[],
       edad :0,
-      educacion :[],
+      educacion :[]
     }
   },
   mounted() {
-
     this.getdatos()
     // SCRIPT PARA ABRIR EL MENU RESPONSI Y CERRAR
     $('.menuH .menuopen').click(function(event) {
@@ -211,26 +210,20 @@ export default {
       $('.map').removeClass('active');
       $('.aside--bar').removeClass('active');
     });
+    
     // END MENU
-
-    
   },
-  
   methods:{
-    
     getdatos(){
       let url = 'http://w.areminds.com/api/parse.php';
       self = this;
       axios.get(url)
-
         .then((respuesta) => {
           this.estados = respuesta.data.estados;
           this.districts = respuesta.data.distritos;
           this.edad = respuesta.data.edad;
           this.educacion = respuesta.data.educacion;
           console.log('educacion', respuesta.data.educacion)
-
-
 
           // MAPA
           var locations = respuesta.data.locations;
@@ -244,45 +237,38 @@ export default {
 
             console.log("Slider Value",sliderValue);
             self.addFilterRange( sliderValue[0],sliderValue[1],'edad_1');
+
           });
+          
         })
         console.log('datos',location);
-
     },
 
     addFilterRange( min, max, criteria ){
       var rows = [];
-
       console.log("Min, Max, Criteria",min, max, this.locations[0]);
-
       for (var i = 0, t = this.locations.length; i < t; i++) {  
         var loc = this.locations[i];
         if( loc[criteria] >= min && loc[criteria] <= max ){
           rows.push(loc);
         }
       }
-
       //Add New Markers
       this.createMarkers( rows, this.createMap() );
-
     },
 
     addFilter( event ){
       var criteria = event.target.value;
       var rows = [];
-
       console.log(event.target.value);
-
       for (var i = 0, t = this.locations.length; i < t; i++) {  
         var loc = this.locations[i];
         if( criteria == loc.distrito ){
           rows.push(loc);
         }
       }
-
       //Add New Markers
       this.createMarkers( rows, this.createMap() );
-
     },
 
     createMap(){
@@ -295,7 +281,6 @@ export default {
 
     createMarkers( locations, map ){
       console.log("Create Markers");
-
       // Info Windows to Show Marker Information
       var infowindow = new google.maps.InfoWindow();
       // Square to use to center the map
@@ -322,7 +307,6 @@ export default {
 
         //Create event
         google.maps.event.addListener(marker, 'click', (function(marker, i) {
-          
           return function() {
             infowindow.setContent(
               '<h4>' + locations[i].nombre_del_establecimiento+ '</h4>' +
@@ -405,6 +389,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+  .tooltip_1.active .tooltip{
+    opacity: 1 !important;
+  } 
   .preload{
     width: 100%;
     height: 100%;
@@ -438,6 +425,7 @@ export default {
     width: 48%;
     display: inline-block;
     vertical-align: top;
+    font-size: 15px;
   }
   .box{
     overflow: hidden;
@@ -490,16 +478,19 @@ export default {
   }
   .map--etiqueta{
     position: absolute;
+    top: 10px;
     z-index: 600;
     right: 0;
     background: #fff;
     height: 40px;
+    font-size: 14px;
     line-height: 40px;
     border-radius: 6px 0px 0px 6px;
     color:#797979;
     padding: 0px 10px 0px 30px;
     text-align: right;
     font-weight: bold;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px;
   }
   .box--filter{
     background: #E8E8E8;
