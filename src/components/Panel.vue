@@ -191,8 +191,13 @@ export default {
       location : [],
       estados :[],
       districts :[],
+<<<<<<< HEAD
       edad :0,
       educacion :[]
+=======
+      edad :{edad:0},
+      educacion :[],
+>>>>>>> 233dd8d7f3c2e7fc5e7bb008d766a296da268207
     }
   },
   mounted() {
@@ -312,7 +317,7 @@ export default {
               '<h4>' + locations[i].nombre_del_establecimiento+ '</h4>' +
               '<form x-update-points>'+
               'Latitud: <input name="latitud" x-latitud value="'+ locations[i].latitud +'" /> '+
-              'Longitud: <input name="latitud" x-longitud value="'+ locations[i].longitud +'" />'+
+              'Longitud: <input name="longitud" x-longitud value="'+ locations[i].longitud +'" />'+
               '<input type="hidden" name="id" x-id value="'+ locations[i].id +'" />'+
               '<br>'+
               '<button x-update >Refresh Points</button> '+ 
@@ -359,7 +364,7 @@ export default {
               axios.get(url)
                 .then((r) => { 
                   console.log("Response", r);
-                  alert(r);
+                  alert( JSON.stringify(r) );
                 });
 
             })
