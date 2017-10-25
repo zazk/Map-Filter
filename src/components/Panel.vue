@@ -164,7 +164,7 @@
           <div class="btn_aside">
             <button class="btn btn-primary">
               <img src="static/reload.svg" width="15" height="15" alt="">
-              recargar filtros
+              Recargar filtros
             </button>
           </div>
         </div>
@@ -177,7 +177,7 @@
           </div>
         </div>
         <div class="map--etiqueta">
-          <span>{{total}} Listings Found </span>
+          <span>{{total}} Puntos Encontrados</span>
         </div>
       </div>
     </div>
