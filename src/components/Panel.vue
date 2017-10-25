@@ -273,7 +273,7 @@ export default {
             
           }
 
-          $('.preload').css('opacity', '0');
+          $('.preload').css('display', 'none');
         })
         console.log('datos',location);
 
