@@ -28,28 +28,40 @@
             <option>Todos</option>
             <option v-for="estado in estados" :value="estado.estado">{{estado.estado}}</option>
           </select>
-        </div>
-        <div class="box-itm">
-          <h3>Educación</h3>
-          <template v-for="educacion in educacion">
-            <div class="boxinput">
-              <input type="checkbox">{{ educacion.educacion }}
-            </div>
-          </template>
+        </div>   
+        <div class="box-itm tooltip_1">
+          <h3>Edad</h3>
+          <input id="ex2" type="text" class="span2 input--slider_1" value="" 
+            data-slider-min="10" 
+            data-slider-max="80" 
+            data-slider-step="5"
+            data-slider-value="[10,80]"
+             />
+          <span class="box--price">
+            <b>&nbsp;</b>  <b></b> 
+          </span>   
         </div>        
-          <div class="box-itm tooltip_1">
-            <h3>Edad</h3>
-            <input id="ex2" type="text" class="span2 input--slider_1" value="" 
-              data-slider-min="10" 
-              data-slider-max="80" 
-              data-slider-step="5"
-              data-slider-value="[10,80]"
-               />
-            <span class="box--price">
-              <b>10</b>  <b>{{edad.edad}}</b> 
-            </span>   
-          </div>
+        <div class="box-itm tooltip_1">
+          <h3>Trabajadores</h3>
+          <input id="ex3" type="text" class="span2 input--slider_2" value="" 
+            data-slider-min="1" 
+            data-slider-max="10" 
+            data-slider-step="1"
+            data-slider-value="[1,10]"
+             />
+          <span class="box--price">
+            <b>&nbsp;</b>  <b></b> 
+          </span>   
+        </div>
         <div style="display:none">
+          <div class="box-itm">
+            <h3>Educación</h3>
+            <template v-for="educacion in educacion">
+              <div class="boxinput">
+                <input type="checkbox">{{ educacion.educacion }}
+              </div>
+            </template>
+          </div>     
           <div class="box-itm">
             <h3>Nombre de Via</h3>
             <select name="" class="form-control" id="">
@@ -194,6 +206,7 @@ export default {
       edad :{edad:0,min:0,max:0},
       educacion :[],
       filtros:{
+        trabajador:{min:0,max:0},
         distrito:"Todos",
         estado:"Todos",
         edad :{min:0,max:0},
@@ -228,6 +241,7 @@ export default {
           this.districts = respuesta.data.distritos;
           this.edad  = respuesta.data.edad;
           this.filtros.edad.max = this.edad.edad;
+          this.filtros.trabajador.max = respuesta.data.trabajadores.trabajadores;
           this.educacion = respuesta.data.educacion;
           console.log('educacion', respuesta.data.educacion)
 
@@ -239,11 +253,20 @@ export default {
           this.createMarkers( locations, this.createMap() );
 
           // SLIDER 
-          var slider = new Slider('.input--slider_1', {tooltip:'always'}).on("slideStop", function(sliderValue) {
+          new Slider('.input--slider_1', {tooltip:'always'}).on("slideStop", function(sliderValue) {
 
-            console.log("Slider Value",sliderValue);
+            console.log("Slider Value",this,sliderValue);
             self.filtros.edad.min = sliderValue[0];
             self.filtros.edad.max = sliderValue[1];
+            self.addFilter();
+
+          });
+
+          new Slider('.input--slider_2', {tooltip:'always'}).on("slideStop", function(sliderValue) {
+
+            console.log("Slider Value",this,sliderValue);
+            self.filtros.trabajador.min = sliderValue[0];
+            self.filtros.trabajador.max = sliderValue[1];
             self.addFilter();
 
           });
@@ -266,8 +289,10 @@ export default {
           this.filtros.estado == loc.estado;
         let isEdadValid = (loc.edad_1 >= this.filtros.edad.min && 
           loc.edad_1 <= this.filtros.edad.max);
+        let isTrabajadoresValid = (loc.nro_trabajadores >= this.filtros.trabajador.min && 
+          loc.nro_trabajadores <= this.filtros.trabajador.max);
 
-        if( isDistritoValid && isEstadoValid && isEdadValid ){
+        if( isDistritoValid && isEstadoValid && isEdadValid && isTrabajadoresValid ){
           rows.push(loc);
           continue;
         }
@@ -397,7 +422,15 @@ export default {
 <style >
   .tooltip_1.active .tooltip{
     opacity: 1 !important;
+    margin-top:-20px !important;
   } 
+  .tooltip.top.in{
+    opacity: 0 !important;
+  }
+  .slider.slider-horizontal{
+    margin-left: 15px;
+    width: 300px !important; 
+  }
   .preload{
     width: 100%;
     height: 100%;
@@ -569,7 +602,8 @@ export default {
   }
   .tooltip.top{
     opacity: 1 !important;
-    display: block !impo;
+    display: block !important;
+    margin-top:22px !important;
   }
   @media screen and (max-width: 1024px) {
     .aside--bar{
