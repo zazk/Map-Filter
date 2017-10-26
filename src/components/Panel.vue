@@ -190,14 +190,9 @@ export default {
       locations : [],
       location : [],
       estados :[],
-      districts :[],
-<<<<<<< HEAD
-      edad :0,
-      educacion :[]
-=======
+      districts :[], 
       edad :{edad:0},
-      educacion :[],
->>>>>>> 233dd8d7f3c2e7fc5e7bb008d766a296da268207
+      educacion :[]
     }
   },
   mounted() {

@@ -34,14 +34,14 @@ export default {
   mounted (){
     $('#form_login').submit(function(e) {
       e.preventDefault()
-      let usuario = "mauricio",
-          clave = "admin",
+      let usuario = "admin",
+          clave = "m00nkey",
           user = $('#user').val(),
           pass = $('#password').val();
 
       if ( user == usuario && pass == clave ) {
         console.log('formulario enviado correctamente');
-        window.location.href = '#/map';
+        window.location.href = '#/';
       } else {
         console.log('formulario no enviado');
         $('.text--error').show();
