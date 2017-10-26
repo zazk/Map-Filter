@@ -244,7 +244,7 @@ export default {
             console.log("Slider Value",sliderValue);
             self.filtros.edad.min = sliderValue[0];
             self.filtros.edad.max = sliderValue[1];
-            self.addFilterRange( sliderValue[0],sliderValue[1],'edad_1');
+            self.addFilter();
 
           });
           
@@ -252,21 +252,9 @@ export default {
         console.log('datos',location);
     },
 
-    addFilterRange( min, max, criteria ){
-      var rows = [];
-      console.log("Min, Max, Criteria",min, max, this.locations[0]);
-      for (var i = 0, t = this.locations.length; i < t; i++) {  
-        var loc = this.locations[i];
-        if( loc[criteria] >= min && loc[criteria] <= max ){
-          rows.push(loc);
-        }
-      }
-      //Add New Markers
-      this.createMarkers( rows, this.createMap() );
-    },
 
     addFilter( event ){
-      var criteria = event.target.value;
+
       var rows = [];
       console.log("Filtros",this.filtros);
       for (var i = 0, t = this.locations.length; i < t; i++) {  
@@ -276,10 +264,10 @@ export default {
           this.filtros.distrito == loc.distrito;
         let isEstadoValid = (this.filtros.estado == 'Todos')? true : 
           this.filtros.estado == loc.estado;
-        let isEdadValid = (this.edad_1 >= this.filtros.edad.min || 
-          this.edad_1 <= this.filtros.edad.max);
+        let isEdadValid = (loc.edad_1 >= this.filtros.edad.min && 
+          loc.edad_1 <= this.filtros.edad.max);
 
-        if( isDistritoValid && isEstadoValid ){
+        if( isDistritoValid && isEstadoValid && isEdadValid ){
           rows.push(loc);
           continue;
         }
