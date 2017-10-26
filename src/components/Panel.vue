@@ -17,16 +17,16 @@
       <aside class="aside--bar">
         <div class="box-itm">
           <h3>Distrito</h3>
-          <select name="" class="form-control" id="" @change="addFilter($event)">
+          <select name="" v-model="filtros.distrito" class="form-control" id="" @change="addFilter($event)">
             <option>Todos</option>
             <option v-for="distrito in districts" :value="distrito.distrito">{{distrito.distrito}}</option>
           </select>
         </div>
         <div class="box-itm">
           <h3>Estado</h3> 
-          <select name="" class="form-control" id="" @change="addFilter($event)">  
+          <select name="" v-model="filtros.estado" class="form-control" id="" @change="addFilter($event)">  
             <option>Todos</option>
-            <option v-for="estado in estados" value="">{{estado.estado}}</option>
+            <option v-for="estado in estados" :value="estado.estado">{{estado.estado}}</option>
           </select>
         </div>
         <div class="box-itm">
@@ -191,8 +191,13 @@ export default {
       location : [],
       estados :[],
       districts :[], 
-      edad :{edad:0},
-      educacion :[]
+      edad :{edad:0,min:0,max:0},
+      educacion :[],
+      filtros:{
+        distrito:"Todos",
+        estado:"Todos",
+        edad :{min:0,max:0},
+      }
     }
   },
   mounted() {
@@ -221,7 +226,8 @@ export default {
         .then((respuesta) => {
           this.estados = respuesta.data.estados;
           this.districts = respuesta.data.distritos;
-          this.edad = respuesta.data.edad;
+          this.edad  = respuesta.data.edad;
+          this.filtros.edad.max = this.edad.edad;
           this.educacion = respuesta.data.educacion;
           console.log('educacion', respuesta.data.educacion)
 
@@ -236,6 +242,8 @@ export default {
           var slider = new Slider('.input--slider_1', {tooltip:'always'}).on("slideStop", function(sliderValue) {
 
             console.log("Slider Value",sliderValue);
+            self.filtros.edad.min = sliderValue[0];
+            self.filtros.edad.max = sliderValue[1];
             self.addFilterRange( sliderValue[0],sliderValue[1],'edad_1');
 
           });
@@ -260,13 +268,23 @@ export default {
     addFilter( event ){
       var criteria = event.target.value;
       var rows = [];
-      console.log(event.target.value);
+      console.log("Filtros",this.filtros);
       for (var i = 0, t = this.locations.length; i < t; i++) {  
-        var loc = this.locations[i];
-        if( criteria == loc.distrito ){
+        let loc = this.locations[i];
+
+        let isDistritoValid = (this.filtros.distrito == 'Todos')? true : 
+          this.filtros.distrito == loc.distrito;
+        let isEstadoValid = (this.filtros.estado == 'Todos')? true : 
+          this.filtros.estado == loc.estado;
+        let isEdadValid = (this.edad_1 >= this.filtros.edad.min || 
+          this.edad_1 <= this.filtros.edad.max);
+
+        if( isDistritoValid && isEstadoValid ){
           rows.push(loc);
+          continue;
         }
       }
+
       //Add New Markers
       this.createMarkers( rows, this.createMap() );
     },
@@ -388,7 +406,7 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style >
   .tooltip_1.active .tooltip{
     opacity: 1 !important;
   } 
@@ -560,6 +578,10 @@ export default {
     font-weight: bold;
     color: #797979;
     font-family: 'arial', sanserif;
+  }
+  .tooltip.top{
+    opacity: 1 !important;
+    display: block !impo;
   }
   @media screen and (max-width: 1024px) {
     .aside--bar{
