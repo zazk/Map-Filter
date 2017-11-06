@@ -129,6 +129,7 @@ export default {
     // END MENU
   },
   methods:{
+
     getdatos(){
       let url = 'http://w.areminds.com/api/parse.php';
       self = this;
@@ -174,7 +175,7 @@ export default {
 
 
     addFilter( event ){
-
+      $('.preload').css('display', 'block');
       var rows = [];
       console.log("Filtros",this.filtros);
       for (var i = 0, t = this.locations.length; i < t; i++) {  
@@ -319,11 +320,19 @@ export default {
       this.total = locations.length;
 
       // Remove Loading
-      $('.preload').css('display', 'none');
+      setTimeout(function(){
+        $('.preload').css('display', 'none');
+      },500)
     }
   }
 }
-
+$(document).ready(function() {
+      $('.box-itm select').change(function(event) {
+      if ($(window).width() <=768 ) {
+        $('.menuH .menuclose').click();
+      }
+    });
+});
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -358,6 +367,17 @@ export default {
     -ms-align-items: center;
     align-items: center;
     justify-content: center;
+  }
+  .imgpreload  {
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    -ms-align-items: center;
+    align-items: center;
+    justify-content: center; 
+    height: 100%;   
   }
   .btn_aside{
     margin-top: 30px;
