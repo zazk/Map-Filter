@@ -53,121 +53,17 @@
             <b>&nbsp;</b>  <b></b> 
           </span>   
         </div>
-        <div style="display:none">
+        <div >
           <div class="box-itm">
             <h3>Educación</h3>
-            <template v-for="educacion in educacion">
+            <template v-for="e in educacion">
               <div class="boxinput">
-                <input type="checkbox">{{ educacion.educacion }}
+                <label>
+                  <input type="checkbox" v-model="educaciones" :value="e.educacion" @change="addFilter($event)"> {{ e.educacion }}
+                </label>
               </div>
             </template>
           </div>     
-          <div class="box-itm">
-            <h3>Nombre de Via</h3>
-            <select name="" class="form-control" id="">
-              <option value="">Nombre de Via</option>
-            </select>
-          </div>
-          <div class="box-itm">
-            <h3>Urbanización</h3>
-            <select name="" class="form-control" id="">
-              <option value="">Urbanización</option>
-            </select>
-          </div>
-          <div class="box-itm">
-            <h3>Actividad</h3>
-            <div class="boxinput">
-              <input type="checkbox"> activa1
-            </div>
-            <div class="boxinput">
-              <input type="checkbox"> activa2
-            </div>
-            <div class="boxinput">
-              <input type="checkbox"> activa3
-            </div>
-            <div class="boxinput">
-              <input type="checkbox"> activa4
-            </div>
-            <div class="boxinput">
-              <input type="checkbox"> activa5
-            </div>
-            <div class="boxinput">
-              <input type="checkbox"> activa6
-            </div>
-            <div class="boxinput">
-              <input type="checkbox"> activa7
-            </div>
-            <div class="boxinput">
-              <input type="checkbox"> activa8
-            </div>
-            <div class="boxinput">
-              <input type="checkbox"> activa9
-            </div>
-            <div class="boxinput">
-              <input type="checkbox"> activa10
-            </div>
-            <div class="boxinput">
-              <input type="checkbox"> activa11
-            </div>
-            <div class="boxinput">
-              <input type="checkbox"> activa12
-            </div>
-            <div class="boxinput">
-              <input type="checkbox"> activa13
-            </div>
-            <div class="boxinput">
-              <input type="checkbox"> activa14
-            </div>
-            <div class="boxinput">
-              <input type="checkbox"> activa15
-            </div>
-            <div class="boxinput">
-              <input type="checkbox"> activa16
-            </div>
-            <div class="boxinput">
-              <input type="checkbox"> activa17
-            </div>
-            <div class="boxinput">
-              <input type="checkbox"> activa18
-            </div>
-            <div class="boxinput">
-              <input type="checkbox"> activa19
-            </div>
-            <div class="boxinput">
-              <input type="checkbox"> activa20
-            </div>
-          </div>
-          <div class="box-itm">
-            <h3>Edad</h3>
-            <div class="boxinput">
-              <input type="checkbox"> activa1
-            </div>
-            <div class="boxinput">
-              <input type="checkbox"> activa2
-            </div>
-            <div class="boxinput">
-              <input type="checkbox"> activa3
-            </div>
-            <div class="boxinput">
-              <input type="checkbox"> activa4
-            </div>
-          </div>
-
-          <div class="box-itm">
-            <h3>Cargo / Funciones</h3>
-            <div class="boxinput">
-              <input type="checkbox"> activa1
-            </div>
-            <div class="boxinput">
-              <input type="checkbox"> activa2
-            </div>
-            <div class="boxinput">
-              <input type="checkbox"> activa3
-            </div>
-            <div class="boxinput">
-              <input type="checkbox"> activa4
-            </div>
-          </div>
           <div class="btn_aside">
             <button class="btn btn-primary">
               <img src="static/reload.svg" width="15" height="15" alt="">
@@ -205,6 +101,7 @@ export default {
       districts :[], 
       edad :{edad:0,min:0,max:0},
       educacion :[],
+      educaciones:[],
       filtros:{
         trabajador:{min:0,max:0},
         distrito:"Todos",
@@ -292,7 +189,16 @@ export default {
         let isTrabajadoresValid = (loc.nro_trabajadores >= this.filtros.trabajador.min && 
           loc.nro_trabajadores <= this.filtros.trabajador.max);
 
-        if( isDistritoValid && isEstadoValid && isEdadValid && isTrabajadoresValid ){
+        if(this.educaciones.length > 0){
+          console.log("Educaciones Checked",this.educaciones);
+          for( var j=0,s = this.educaciones.length;j<s;j++ ){
+
+          } 
+        }
+        let isEducacion = true;//this.filtros.estado == loc.educacion_1;
+
+        if( isDistritoValid && isEstadoValid && isEdadValid 
+            && isTrabajadoresValid && isEducacion ){
           rows.push(loc);
           continue;
         }
@@ -340,23 +246,25 @@ export default {
         google.maps.event.addListener(marker, 'click', (function(marker, i) {
           return function() {
             infowindow.setContent(
-              '<h4>' + locations[i].nombre_del_establecimiento+ '</h4>' +
-              '<form x-update-points>'+
-              'Latitud: <input name="latitud" x-latitud value="'+ locations[i].latitud +'" /> '+
-              'Longitud: <input name="longitud" x-longitud value="'+ locations[i].longitud +'" />'+
-              '<input type="hidden" name="id" x-id value="'+ locations[i].id +'" />'+
-              '<br>'+
-              '<button x-update >Refresh Points</button> '+ 
-              '<form>'+
-              'ID:'+ locations[i].id +
-              '<br>'+
-              'Distrito: ' +locations[i].distrito +
-              '<br>'+
-              'Fecha: ' +locations[i].fecha +
-              '<br>'+
-              'Estado: ' +locations[i].estado +
-              '<br>'+
-              'Razon Social: ' +locations[i].razon_social_del_establecimiento +
+              `<h4> ${locations[i].nombre_del_establecimiento} </h4>
+                <form x-update-points>
+                  Latitud: 
+                    <input name="latitud" x-latitud value="${locations[i].latitud}" /> 
+                  Longitud: 
+                    <input name="longitud" x-longitud value="${locations[i].longitud}" />
+                  <input type="hidden" name="id" x-id value="${locations[i].id}" />
+                  <br>
+                <button x-update >Refresh Points</button> 
+                <form>
+                ID: ${locations[i].id}
+              <br>
+              Distrito: ${locations[i].distrito}
+              <br>
+              Fecha: ${locations[i].fecha}
+              <br>
+              Estado: ${locations[i].estado}
+              <br>
+              Razon Social: ${locations[i].razon_social_del_establecimiento} `+
               '<br>'+
               'Celular: ' +locations[i].celular_local_1+' '+locations[i].celular_local_2+' '+locations[i].celular_local_3+
               '<br>'+
@@ -429,7 +337,7 @@ export default {
   }
   .slider.slider-horizontal{
     margin-left: 15px;
-    width: 300px !important; 
+    width: 260px !important; 
   }
   .preload{
     width: 100%;
@@ -465,6 +373,12 @@ export default {
     display: inline-block;
     vertical-align: top;
     font-size: 15px;
+    padding:10px; 
+    line-height: 100%;
+  }
+
+  .boxinput input[type=checkbox]{
+    
   }
   .box{
     overflow: hidden;
