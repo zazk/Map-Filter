@@ -187,17 +187,37 @@ export default {
           this.filtros.estado == loc.estado;
         let isEdadValid = (loc.edad_1 >= this.filtros.edad.min && 
           loc.edad_1 <= this.filtros.edad.max);
-        let isTrabajadoresValid = (loc.nro_trabajadores >= this.filtros.trabajador.min && 
-          loc.nro_trabajadores <= this.filtros.trabajador.max);
+        let isTrabajadoresValid = (loc.nro_trabajadores >= parseInt(this.filtros.trabajador.min,10) && 
+          loc.nro_trabajadores <= parseInt(this.filtros.trabajador.max,10) );
 
+        let isEducacion = false;//this.filtros.estado == loc.educacion_1;
         if(this.educaciones.length > 0){
-          console.log("Educaciones Checked",this.educaciones);
+          
           for( var j=0,s = this.educaciones.length;j<s;j++ ){
+            let edu = this.educaciones[j] ;
+
+            isEducacion = ( edu == loc.educacion_1 || edu == loc.educacion_2 
+                || edu == loc.educacion_3 || edu == loc.educacion_4 )  ;
+            
+            if ( isEducacion ){
+              break;
+            }
 
           } 
+        }else{
+          isEducacion = true; 
         }
-        let isEducacion = true;//this.filtros.estado == loc.educacion_1;
-
+        if (isEducacion){
+          console.log("========================");
+          console.log("Is Mine is Educacionsss",isEducacion);
+          console.log("Is Mine is isEstadoValid", isEstadoValid);
+          console.log("Is Mine is isDistritoValid", isDistritoValid);
+          console.log("Is Mine is isEdadValid", isEdadValid);
+          console.log("Is Mine is isTrabajadoresValid", isTrabajadoresValid, this.filtros.trabajador, loc.nro_trabajadores, "(loc.nro_trabajadores >= this.filtros.trabajador.min ):", (loc.nro_trabajadores >= this.filtros.trabajador.min ), " (loc.nro_trabajadores <= this.filtros.trabajador.max):",(
+      loc.nro_trabajadores <= (this.filtros.trabajador.max)) );
+          console.log("========================");
+          
+        }
         if( isDistritoValid && isEstadoValid && isEdadValid 
             && isTrabajadoresValid && isEducacion ){
           rows.push(loc);
