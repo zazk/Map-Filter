@@ -15,6 +15,7 @@
     </nav>
     <div class="box--flex">
       <aside class="aside--bar">
+        <h2>Filtros</h2>
         <div class="box-itm">
           <h3>Distrito</h3>
           <select name="" v-model="filtros.distrito" class="form-control" id="" @change="addFilter($event)">
@@ -59,12 +60,52 @@
             <template v-for="e in educacion">
               <div class="boxinput">
                 <label>
-                  <input type="checkbox" v-model="educaciones" :value="e.educacion" @change="addFilter($event)"> {{ e.educacion }}
+                  <input type="checkbox" v-model="filtros.educaciones" :value="e.educacion" @change="addFilter($event)"> <span>{{ e.educacion }}</span>
+                </label>
+              </div>
+            </template>
+          </div>    
+          <div class="box-itm">
+            <h3>Actividades</h3>
+            <template v-for="a in actividades">
+              <div class="boxinput">
+                <label>
+                  <input type="checkbox" v-model="filtros.actividades" :value="a" @change="addFilter($event)"> <span>{{ a }}</span>
+                </label>
+              </div>
+            </template>
+          </div>
+          <div class="box-itm">
+            <h3>Cargo</h3>
+            <template v-for="c in cargos">
+              <div class="boxinput">
+                <label>
+                  <input type="checkbox" v-model="filtros.cargos" :value="c" @change="addFilter($event)"> <span>{{ c }}</span>
+                </label>
+              </div>
+            </template>
+          </div>
+          <div class="box-itm">
+            <h3>Medios</h3>
+            <template v-for="m in medios">
+              <div class="boxinput">
+                <label>
+                  <input type="checkbox" v-model="filtros.medios" :value="m" @change="addFilter($event)"> <span>{{ m }}</span>
+                </label>
+              </div>
+            </template>
+          </div>
+          <div class="box-itm">
+            <h3>Carrera</h3>
+            <template v-for="c in carreras">
+              <div class="boxinput">
+                <label>
+                  <input type="checkbox" v-model="filtros.carreras" :value="c" @change="addFilter($event)"> <span>{{ c }}</span>
                 </label>
               </div>
             </template>
           </div>     
-          <div class="btn_aside">
+          <div class="btn_aside" style="display:none;">
             <button class="btn btn-primary">
               <img src="static/reload.svg" width="15" height="15" alt="">
               Recargar filtros
@@ -80,7 +121,7 @@
           </div>
         </div>
         <div class="map--etiqueta">
-          <span>{{total}} Puntos</span>
+          <span>Mostrando: {{total}} Puntos</span>
         </div>
       </div>
     </div>
@@ -101,12 +142,24 @@ export default {
       districts :[], 
       edad :{edad:0,min:0,max:0},
       educacion :[],
-      educaciones:[],
+      actividades:["Venta de repuestos."
+          ,"Taller mecánico"
+          ,"Mantenimiento para autos mecánicos"
+          ,"Embragues","Motores"],
+      cargos:["Mecánico","Dueño","Ventas","Ayudante","Operador"],
+      medios:["Televisión","Periódico","Correo","Facebook","Radio","Celular"],
+      carreras:["Mecánica Eléctrica","Mecánica General","Mecatrónica",
+        "Electrónica","Mecánica Automotriz"],
       filtros:{
         trabajador:{min:0,max:0},
         distrito:"Todos",
         estado:"Todos",
         edad :{min:0,max:0},
+        educaciones:[],
+        actividades:[],
+        cargos:[],
+        medios:[],
+        carreras:[]
       }
     }
   },
@@ -190,11 +243,12 @@ export default {
         let isTrabajadoresValid = (loc.nro_trabajadores >= parseInt(this.filtros.trabajador.min,10) && 
           loc.nro_trabajadores <= parseInt(this.filtros.trabajador.max,10) );
 
-        let isEducacion = false;//this.filtros.estado == loc.educacion_1;
-        if(this.educaciones.length > 0){
+        // Educacion Filter
+        let isEducacion = false;
+        if(this.filtros.educaciones.length > 0){
           
-          for( var j=0,s = this.educaciones.length;j<s;j++ ){
-            let edu = this.educaciones[j] ;
+          for( var j=0,s = this.filtros.educaciones.length;j<s;j++ ){
+            let edu = this.filtros.educaciones[j] ;
 
             isEducacion = ( edu == loc.educacion_1 || edu == loc.educacion_2 
                 || edu == loc.educacion_3 || edu == loc.educacion_4 )  ;
@@ -207,19 +261,112 @@ export default {
         }else{
           isEducacion = true; 
         }
-        if (isEducacion){
-          console.log("========================");
-          console.log("Is Mine is Educacionsss",isEducacion);
-          console.log("Is Mine is isEstadoValid", isEstadoValid);
-          console.log("Is Mine is isDistritoValid", isDistritoValid);
-          console.log("Is Mine is isEdadValid", isEdadValid);
-          console.log("Is Mine is isTrabajadoresValid", isTrabajadoresValid, this.filtros.trabajador, loc.nro_trabajadores, "(loc.nro_trabajadores >= this.filtros.trabajador.min ):", (loc.nro_trabajadores >= this.filtros.trabajador.min ), " (loc.nro_trabajadores <= this.filtros.trabajador.max):",(
-      loc.nro_trabajadores <= (this.filtros.trabajador.max)) );
-          console.log("========================");
+        //------------        
+        // Actividades Filter
+        let isActividad = false;
+        if(this.filtros.actividades.length > 0){
           
+          for( var j=0,s = this.filtros.actividades.length;j<s;j++ ){
+            let acti = this.filtros.actividades[j] ;
+
+            isActividad = ( 
+                acti == loc.actividad_1 || acti == loc.actividad_2 
+                || acti == loc.actividad_3 || acti == loc.actividad_4
+                || acti == loc.actividad_5 || acti == loc.actividad_6
+                || acti == loc.actividad_7 || acti == loc.actividad_8
+                || acti == loc.actividad_9 || acti == loc.actividad_10 
+                || acti == loc.actividad_11 || acti == loc.actividad_12 
+                || acti == loc.actividad_13 || acti == loc.actividad_14  
+                || acti == loc.actividad_15 || acti == loc.actividad_16  
+                || acti == loc.actividad_17 || acti == loc.actividad_18 
+                || acti == loc.actividad_19 || acti == loc.actividad_20  
+                || acti == loc.actividad_21 || acti == loc.actividad_22 
+                || acti == loc.actividad_23 || acti == loc.actividad_24   
+                )  ;
+            
+            if ( isActividad ){
+              break;
+            }
+
+          } 
+        }else{
+          isActividad = true; 
         }
+        //------------
+        //------------        
+        // Cargos Filter
+        let isCargos = false;
+        if(this.filtros.cargos.length > 0){
+          
+          for( var j=0,s = this.filtros.cargos.length;j<s;j++ ){
+            let acti = this.filtros.cargos[j] ;
+
+            isCargos = ( 
+                acti == loc.cargo_1 || acti == loc.cargo_2 
+                || acti == loc.cargo_3 || acti == loc.cargo_4
+                || acti == loc.cargo_5   
+                )  ;
+            
+            if ( isCargos ){
+              break;
+            }
+
+          } 
+        }else{
+          isCargos = true; 
+        }
+        //------------
+        //------------        
+        // Medios Filter
+        let isMedios = false;
+        if(this.filtros.medios.length > 0){
+          
+          for( var j=0,s = this.filtros.medios.length;j<s;j++ ){
+            let acti = this.filtros.medios[j] ;
+
+            isMedios = ( 
+                acti == loc.medios_1 || acti == loc.medios_12
+                || acti == loc.medios_3 || acti == loc.medios_4
+                || acti == loc.medios_5 || acti == loc.medios_6
+                )  ;
+            
+            if ( isMedios ){
+              break;
+            }
+
+          } 
+        }else{
+          isMedios = true; 
+        }
+        //------------
+        //------------        
+        // Actividades Filter
+        let isCarreras = false;
+        if(this.filtros.carreras.length > 0){
+          
+          for( var j=0,s = this.filtros.carreras.length;j<s;j++ ){
+            let acti = this.filtros.carreras[j] ;
+
+            isCarreras = ( 
+                acti == loc.carrera_1 || acti == loc.carrera_2
+                || acti == loc.carrera_3 || acti == loc.carrera_4
+                || acti == loc.carrera_5 || acti == loc.carrera_6
+                || acti == loc.carrera_7  
+                )  ;
+            
+            if ( isCarreras ){
+              break;
+            }
+
+          } 
+        }else{
+          isCarreras = true; 
+        }
+        //------------
+
         if( isDistritoValid && isEstadoValid && isEdadValid 
-            && isTrabajadoresValid && isEducacion ){
+            && isCargos && isMedios && isCarreras
+            && isTrabajadoresValid && isEducacion && isActividad ){
           rows.push(loc);
           continue;
         }
@@ -413,12 +560,21 @@ $(document).ready(function() {
     display: inline-block;
     vertical-align: top;
     font-size: 15px;
-    padding:10px; 
+    padding:3px 10px; 
     line-height: 100%;
   }
 
   .boxinput input[type=checkbox]{
-    
+    position: absolute;
+    top:0px;
+    left: 0;
+  }
+  .boxinput span{
+    display: inline-block;
+    margin-left: 15px;
+  }
+  .boxinput label{
+    position: relative;
   }
   .box{
     overflow: hidden;
