@@ -198,7 +198,7 @@ export default {
   },
   methods: {
     getdatos() {
-      let url = "http://w.areminds.com/api/parse.php";
+      let url = "https://w.areminds.com/api/parse.php";
       self = this;
       axios.get(url).then(respuesta => {
         this.estados = respuesta.data.estados;
@@ -556,7 +556,7 @@ export default {
                 let latitud = $("[x-latitud]");
                 let id = $("[x-id]");
                 let url =
-                  "http://w.areminds.com/api/parse.php?" +
+                  "https://w.areminds.com/api/parse.php?" +
                   $("[x-update-points]").serialize();
                 console.log("sent points", longitud, latitud, id, "url:", url);
                 axios.get(url).then(r => {
